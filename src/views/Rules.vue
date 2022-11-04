@@ -1,14 +1,14 @@
 <template>
-  <section class="locations">
+  <section class="rules">
     <div class="container">
-      <div class="locations__inner">locations</div>
+      <div class="rules__inner">rules</div>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'SpyLocations'
+  name: 'SpyRules'
 }
 </script>
 

@@ -1,14 +1,14 @@
 <template>
-  <section class="locations">
+  <section class="professions">
     <div class="container">
-      <div class="locations__inner">locations</div>
+      <div class="professions__inner">professions</div>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'SpyLocations'
+  name: 'SpyProfessions'
 }
 </script>
 
