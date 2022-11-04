@@ -1,30 +1,39 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="wrapper">
+    <spy-header />
+    <main class="main">
+      <router-view />
+    </main>
+    <spy-footer />
+  </div>
 </template>
 
+<script>
+import SpyHeader from '@/components/Header'
+import SpyFooter from '@/components/Footer'
+export default {
+  components: {
+    SpyFooter,
+    SpyHeader
+  }
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.wrapper {
+  background-color: $grey;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-nav {
-  padding: 30px;
+.main {
+  margin-bottom: auto;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.container {
+  max-width: 596px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 </style>
