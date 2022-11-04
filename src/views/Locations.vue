@@ -1,7 +1,7 @@
 <template>
   <section class="locations">
     <div class="container">
-      <div class="locations__inner">locations</div>
+      <div class="locations__inner">Тут будут места</div>
     </div>
   </section>
 </template>
@@ -12,4 +12,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.locations {
+  &__inner {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+  }
+}
+</style>

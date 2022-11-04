@@ -1,7 +1,7 @@
 <template>
   <section class="professions">
     <div class="container">
-      <div class="professions__inner">professions</div>
+      <div class="professions__inner">тут будут профессии</div>
     </div>
   </section>
 </template>
@@ -12,4 +12,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.professions {
+  &__inner {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+  }
+}
+</style>

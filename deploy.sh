@@ -11,17 +11,17 @@ cd dist
 
 # если вы публикуете на пользовательский домен
 # echo 'www.example.com' > CNAME
-
+git status
 git init
 git add -A
 git commit -m 'deploy'
+git status
 
 # если вы публикуете по адресу https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # если вы публикуете по адресу https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
-git push -f git@github.com:vladislav149/spy-game.git main:gh-pages
-
+git push -f git@github.com:vladislav149/spy-game.git master:gh-pages
 
 cd -

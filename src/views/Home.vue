@@ -38,9 +38,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  &__box {
     text-align: center;
   }
 
@@ -83,7 +80,7 @@ export default {
     background-color: $teal-200;
     border-radius: 5px;
     padding: 5px 10px;
-    width: 140px;
+    min-width: 140px;
     z-index: 20;
     position: relative;
     left: 0;
