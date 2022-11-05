@@ -9,12 +9,12 @@
           </div>
           <ul class="home__links">
             <li class="home__link">
-              <router-link class="home__router-link" :to="{name: 'locations'}"
+              <router-link class="home__router-link" :to="{name: 'settings'}"
                 >Места</router-link
               >
             </li>
             <li class="home__link">
-              <router-link class="home__router-link" :to="{name: 'professions'}"
+              <router-link class="home__router-link" :to="{name: 'settings'}"
                 >Профессии</router-link
               >
             </li>

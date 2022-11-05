@@ -37,4 +37,10 @@ export default {
   margin: 0 auto;
   padding: 0 10px;
 }
+
+.wrapper .border {
+  border: 1px solid $grey-300;
+  border-radius: 5px;
+  background-color: $teal-100;
+}
 </style>
