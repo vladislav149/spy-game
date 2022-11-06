@@ -12,7 +12,7 @@
                 <button
                   class="settings__sign border"
                   type="button"
-                  @click="numberOfPlayers--"
+                  @click="decrease('numberOfPlayers')"
                 >
                   -
                 </button>
@@ -23,6 +23,7 @@
                   min="3"
                   placeholder="количество игроков"
                   v-model="numberOfPlayers"
+                  disabled
                 />
                 <button
                   class="settings__sign border"
@@ -64,9 +65,14 @@
                       type="number"
                       v-model="minutes"
                       min="0"
+                      disabled
                     />
                     <div class="settings__col">
-                      <button class="settings__btn-time border" type="button">
+                      <button
+                        class="settings__btn-time border"
+                        type="button"
+                        @click="minutes++"
+                      >
                         <svg
                           class="arrow-up"
                           xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +94,11 @@
                           />
                         </svg>
                       </button>
-                      <button class="settings__btn-time border" type="button">
+                      <button
+                        class="settings__btn-time border"
+                        type="button"
+                        @click="decrease('minutes')"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           xml:space="preserve"
@@ -126,9 +136,14 @@
                       v-model="seconds"
                       min="0"
                       max="59"
+                      disabled
                     />
                     <div class="settings__col">
-                      <button class="settings__btn-time border" type="button">
+                      <button
+                        class="settings__btn-time border"
+                        type="button"
+                        @click="incSecond"
+                      >
                         <svg
                           class="arrow-up"
                           xmlns="http://www.w3.org/2000/svg"
@@ -212,10 +227,24 @@ export default {
         return (this.seconds = 5)
       }
       if (this.seconds < 5) {
-        this.seconds = 60
+        this.seconds = 55
         this.minutes -= 1
+        return
       }
       this.seconds -= 5
+    },
+    incSecond() {
+      if (this.seconds >= 55) {
+        this.seconds = 0
+        this.minutes += 1
+        return
+      }
+      this.seconds += 5
+    },
+    decrease(item) {
+      if (item === 'minutes' && this.minutes === 0) return
+      if (item === 'numberOfPlayers' && this[item] === 3) return
+      this[item]--
     }
   }
 }
@@ -316,6 +345,11 @@ export default {
     &:not(:last-child) {
       margin-bottom: 5px;
     }
+  }
+
+  &__time {
+    max-width: 137px;
+    width: 100%;
   }
 }
 
