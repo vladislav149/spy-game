@@ -10,38 +10,23 @@ const state = {
 }
 
 export const mutationTypes = {
-  changeNumberOfPlayers: '[players] change number of players',
-  changeNumberOfSpy: '[players] change number of spy',
-  changeNumberOfMinutes: '[players] change number of minutes',
-  changeNumberOfSeconds: '[players] change number of seconds'
+  changeDataOfPlayers: '[players] change data of players'
 }
 
 export const actionTypes = {
-  NumberOfPlayers: '[players] change number of players',
-  NumberOfSpy: '[players] change number of spy',
-  NumberOfMinutes: '[players] change number of minutes',
-  NumberOfSeconds: '[players] change number of seconds'
+  dataOfPlayers: '[players] data of players'
 }
 
 const mutations = {
-  [mutationTypes.changeNumberOfPlayers](state, payload) {
-    state.players.numberOf = payload
-  },
-  [mutationTypes.changeNumberOfSpy](state, payload) {
-    state.players.numberOfSpy = payload
-  },
-  [mutationTypes.changeNumberOfMinutes](state, payload) {
-    state.players.time.minutes = payload
-  },
-  [mutationTypes.changeNumberOfSeconds](state, payload) {
-    state.players.time.seconds = payload
+  [mutationTypes.changeDataOfPlayers](state, payload) {
+    state.players = payload
   }
 }
 
 const actions = {
-  [actionTypes.NumberOfPlayers](context, number) {
+  [actionTypes.dataOfPlayers](context, data) {
     return new Promise(resolve => {
-      context.commit(mutationTypes.changeNumberOfPlayers, number)
+      context.commit(mutationTypes.changeDataOfPlayers, data)
       resolve()
     })
   }

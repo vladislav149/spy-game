@@ -2,7 +2,7 @@
   <section class="settings">
     <div class="container">
       <div class="settings__inner">
-        <form class="settings__form">
+        <form class="settings__form" @submit.prevent="startGame">
           <ul class="settings__list">
             <li class="settings__item">
               <label class="settings__label" for="players"
@@ -204,6 +204,7 @@
 </template>
 
 <script>
+import {actionTypes} from '@/store/modules/players'
 export default {
   name: 'SpySettings',
   data() {
@@ -245,6 +246,20 @@ export default {
       if (item === 'minutes' && this.minutes === 0) return
       if (item === 'numberOfPlayers' && this[item] === 3) return
       this[item]--
+    },
+    startGame() {
+      this.$store
+        .dispatch(actionTypes.dataOfPlayers, {
+          numberOf: this.numberOfPlayers,
+          numberOfSpy: Number(this.numberOfSpy),
+          time: {
+            minutes: this.minutes,
+            seconds: this.seconds
+          }
+        })
+        .then(() => {
+          this.$router.push({name: 'game'})
+        })
     }
   }
 }
