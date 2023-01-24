@@ -1,3 +1,5 @@
+const spy = 'ты шпион!'
+
 const state = {
   players: {
     numberOf: 0,
@@ -9,24 +11,25 @@ const state = {
   }
 }
 
-export const mutationTypes = {
-  changeDataOfPlayers: '[players] change data of players'
-}
-
-export const actionTypes = {
-  dataOfPlayers: '[players] data of players'
+const getters = {
+  getCardArr: state => guessable => {
+    const arr = Array.from({length: state.players.numberOf}, (_, i) =>
+      i < state.players.numberOfSpy ? spy : guessable
+    )
+    return arr
+  }
 }
 
 const mutations = {
-  [mutationTypes.changeDataOfPlayers](state, payload) {
+  changeDataOfPlayers(state, payload) {
     state.players = payload
   }
 }
 
 const actions = {
-  [actionTypes.dataOfPlayers](context, data) {
+  dataOfPlayers({commit}, data) {
     return new Promise(resolve => {
-      context.commit(mutationTypes.changeDataOfPlayers, data)
+      commit('changeDataOfPlayers', data)
       resolve()
     })
   }
@@ -34,6 +37,8 @@ const actions = {
 
 export default {
   state,
+  getters,
   mutations,
-  actions
+  actions,
+  namespaced: true
 }

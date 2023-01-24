@@ -10,9 +10,10 @@
               >
               <div class="settings__box">
                 <button
+                  @click="numberOfPlayers--"
+                  :disabled="numberOfPlayers <= 3"
                   class="settings__sign border"
                   type="button"
-                  @click="decrease('numberOfPlayers')"
                 >
                   -
                 </button>
@@ -26,9 +27,9 @@
                   disabled
                 />
                 <button
+                  @click="numberOfPlayers++"
                   class="settings__sign border"
                   type="button"
-                  @click="numberOfPlayers++"
                 >
                   +
                 </button>
@@ -69,9 +70,9 @@
                     />
                     <div class="settings__col">
                       <button
+                        @click="minutes++"
                         class="settings__btn-time border"
                         type="button"
-                        @click="minutes++"
                       >
                         <svg
                           class="arrow-up"
@@ -95,9 +96,10 @@
                         </svg>
                       </button>
                       <button
+                        @click="minutes--"
+                        :disabled="!minutes"
                         class="settings__btn-time border"
                         type="button"
-                        @click="decrease('minutes')"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +144,7 @@
                       <button
                         class="settings__btn-time border"
                         type="button"
-                        @click="incSecond"
+                        @click="seconds += 5"
                       >
                         <svg
                           class="arrow-up"
@@ -166,9 +168,10 @@
                         </svg>
                       </button>
                       <button
+                        :disabled="!minutes && seconds <= 5"
+                        @click="seconds -= 5"
                         class="settings__btn-time border"
                         type="button"
-                        @click="decSecond"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -204,12 +207,11 @@
 </template>
 
 <script>
-import {actionTypes} from '@/store/modules/players'
 export default {
   name: 'SpySettings',
   data() {
     return {
-      numberOfPlayers: 3,
+      numberOfPlayers: 4,
       numberOfSpy: 1,
       minutes: 1,
       seconds: 30
@@ -220,36 +222,31 @@ export default {
       if (this.numberOfSpy >= this.numberOfPlayers) {
         this.numberOfSpy = this.numberOfPlayers
       }
+      if (this.numberOfPlayers < 3) this.numberOfPlayers = 3
+    },
+    minutes() {
+      if (this.minutes < 0) this.minutes = 0
+    },
+    seconds() {
+      if (this.seconds >= 60) {
+        this.seconds = 0
+        this.minutes += 1
+      }
+
+      if (!this.minutes && this.seconds < 5) {
+        this.seconds = 5
+      }
+
+      if (this.minutes && this.seconds < 0) {
+        this.seconds = 55
+        this.minutes -= 1
+      }
     }
   },
   methods: {
-    decSecond() {
-      if (this.minutes === 0 && this.seconds <= 5) {
-        return (this.seconds = 5)
-      }
-      if (this.seconds < 5) {
-        this.seconds = 55
-        this.minutes -= 1
-        return
-      }
-      this.seconds -= 5
-    },
-    incSecond() {
-      if (this.seconds >= 55) {
-        this.seconds = 0
-        this.minutes += 1
-        return
-      }
-      this.seconds += 5
-    },
-    decrease(item) {
-      if (item === 'minutes' && this.minutes === 0) return
-      if (item === 'numberOfPlayers' && this[item] === 3) return
-      this[item]--
-    },
     startGame() {
       this.$store
-        .dispatch(actionTypes.dataOfPlayers, {
+        .dispatch('players/dataOfPlayers', {
           numberOf: this.numberOfPlayers,
           numberOfSpy: Number(this.numberOfSpy),
           time: {
@@ -258,7 +255,7 @@ export default {
           }
         })
         .then(() => {
-          this.$router.push({name: 'game'})
+          this.$router.push({name: 'start'})
         })
     }
   }

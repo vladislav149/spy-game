@@ -2,15 +2,19 @@
   <div class="game">
     <div class="container">
       <div class="game__inner">
-        <h2 class="game__title">игра уже почти начинается</h2>
+        <spy-game />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SpyGame from '@/components/Game'
 export default {
-  name: 'SpyGame',
+  name: 'SpyStart',
+  components: {
+    SpyGame
+  },
   mounted() {
     if (!this.$store.state.players.players.numberOf) {
       this.$router.push({name: 'home'})
